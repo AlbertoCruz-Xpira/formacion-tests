@@ -1,0 +1,229 @@
+
+<main class="jasmine-1-page">
+	<header class="panel hero jasmine-hero">
+		<div class="jasmine-hero__copy">
+			<p class="eyebrow">testing front-end</p>
+			<h1>Jasmine 1. Primer contacto</h1>
+			<p class="lead">
+				Jasmine aparece cuando los <strong class="text-highlight">asserts básicos</strong>
+				se quedan cortos para explicar mejor qué estamos probando.
+				No sustituye la idea de comprobar resultados:
+				<strong class="text-highlight">la organiza en un lenguaje más legible</strong>.
+			</p>
+		</div>
+		<figure class="jasmine-logo-card">
+			<img
+				class="jasmine-logo-card__image"
+				src="https://cdn.simpleicons.org/jasmine/8A4182"
+				alt="Logo de Jasmine"
+				loading="lazy"
+			/>
+			<figcaption>Jasmine</figcaption>
+		</figure>
+	</header>
+
+	<section class="section-block panel" aria-labelledby="evolution-title">
+		<h2 id="evolution-title">De console.assert a Jasmine</h2>
+		<p>
+			Con <code>console.assert</code> ya podíamos comprobar condiciones sencillas,
+			pero cuando los ejemplos crecen necesitamos una forma más clara de decir
+			<strong class="text-highlight">qué módulo probamos, qué caso cubrimos y qué esperamos</strong>.
+		</p>
+		<div class="bdd-intro jasmine-comparison">
+			<article class="reason-card bdd-card">
+				<h3>Antes: assert suelto</h3>
+				<div class="code-frame" aria-label="Ejemplo de assert básico con console.assert">
+					<div class="code-frame__topbar">
+						<span class="code-dot code-dot--pink" aria-hidden="true"></span>
+						<span class="code-dot code-dot--yellow" aria-hidden="true"></span>
+						<span class="code-dot code-dot--green" aria-hidden="true"></span>
+						<p class="code-frame__title">basic-assert.example.js</p>
+					</div>
+					<pre class="code-frame__pre"><code ngNonBindable class="language-javascript">function sum(a, b) &#123;
+	return a + b;
+&#125;
+
+console.assert(sum(2, 2) === 4, '2 + 2 debería ser 4');</code></pre>
+				</div>
+				<p class="bdd-reading">
+					<strong class="text-highlight">Qué falta aquí:</strong>
+					vemos la comprobación, pero no hay una estructura clara para agrupar casos.
+				</p>
+			</article>
+
+			<article class="reason-card bdd-card">
+				<h3>Después: spec con Jasmine</h3>
+				<div class="code-frame" aria-label="Ejemplo básico con Jasmine">
+					<div class="code-frame__topbar">
+						<span class="code-dot code-dot--pink" aria-hidden="true"></span>
+						<span class="code-dot code-dot--yellow" aria-hidden="true"></span>
+						<span class="code-dot code-dot--green" aria-hidden="true"></span>
+						<p class="code-frame__title">sum.spec.js</p>
+					</div>
+					<pre class="code-frame__pre"><code ngNonBindable class="language-javascript">describe('sum', () =&gt; &#123;
+	it('debería devolver 4 al sumar 2 y 2', () =&gt; &#123;
+		expect(sum(2, 2)).toBe(4);
+	&#125;);
+&#125;);</code></pre>
+				</div>
+				<p class="bdd-reading">
+					<strong class="text-highlight">Qué ganamos:</strong>
+					el test ya cuenta una historia y deja más claro el comportamiento esperado.
+				</p>
+			</article>
+		</div>
+	</section>
+
+	<section class="section-block panel" aria-labelledby="independent-library-title">
+		<h2 id="independent-library-title">Jasmine es una librería independiente</h2>
+		<div class="reason-grid">
+			<article class="reason-card">
+				<h3>No forma parte de JavaScript</h3>
+				<p>
+					<code>console.assert</code> existe en el entorno de ejecución,
+					pero Jasmine es una librería aparte que añadimos para escribir tests con más estructura.
+				</p>
+			</article>
+			<article class="reason-card">
+				<h3>Define funciones globales</h3>
+				<p>
+					Al cargar Jasmine, aparecen funciones globales como
+					<strong class="text-highlight">describe</strong>,
+					<strong class="text-highlight">it</strong> y
+					<strong class="text-highlight">expect</strong>.
+				</p>
+			</article>
+			<article class="reason-card">
+				<h3>Su objetivo</h3>
+				<p>
+					No cambia lo que significa testear: simplemente ofrece un lenguaje mejor para
+					<strong class="text-highlight">organizar y leer las pruebas</strong>.
+				</p>
+			</article>
+		</div>
+	</section>
+
+	<section class="section-block panel" aria-labelledby="dsl-title">
+		<h2 id="dsl-title">DSL y enfoque BDD</h2>
+		<div class="bdd-intro">
+			<article class="reason-card bdd-card">
+				<h3>¿Qué es un DSL?</h3>
+				<p>
+					Jasmine propone un
+					<strong class="text-highlight">DSL (Domain Specific Language)</strong>
+					para que los tests se lean casi como frases.
+				</p>
+				<p class="bdd-reading">
+					<strong class="text-highlight">Idea principal:</strong>
+					el test no solo ejecuta código; también comunica intención.
+				</p>
+			</article>
+
+			<article class="reason-card bdd-card">
+				<h3>¿Y el BDD?</h3>
+				<p>
+					BDD significa <strong class="text-highlight">Behavior Driven Development</strong>.
+					Aquí nos interesa la parte práctica: describir el comportamiento esperado de forma clara.
+				</p>
+				<table class="dsl-table" aria-label="Palabras clave de Jasmine y su significado">
+					<thead>
+						<tr>
+							<th>Palabra</th>
+							<th>Qué expresa</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>describe</td>
+							<td>De qué unidad o tema estamos hablando</td>
+						</tr>
+						<tr>
+							<td>it</td>
+							<td>Qué comportamiento debería ocurrir</td>
+						</tr>
+						<tr>
+							<td>expect</td>
+							<td>Qué resultado esperamos observar</td>
+						</tr>
+					</tbody>
+				</table>
+			</article>
+		</div>
+	</section>
+
+	<section class="section-block panel" aria-labelledby="core-functions-title">
+		<h2 id="core-functions-title">Las tres piezas básicas</h2>
+		<div class="reason-grid">
+			<article class="reason-card">
+				<h3>describe</h3>
+				<p>
+					Agrupa tests relacionados. Suele nombrar una función, un componente o una regla.
+				</p>
+			</article>
+			<article class="reason-card">
+				<h3>it</h3>
+				<p>
+					Define un caso concreto. Lo normal es que se lea como una expectativa breve.
+				</p>
+			</article>
+			<article class="reason-card">
+				<h3>expect</h3>
+				<p>
+					Es la aserción. Compara el resultado real con el que esperamos obtener.
+				</p>
+			</article>
+		</div>
+	</section>
+
+	<section class="section-block panel" aria-labelledby="basic-examples-title">
+		<h2 id="basic-examples-title">Tests básicos de ejemplo</h2>
+		<p>
+			En esta primera página basta con entender la estructura.
+			Los ejemplos son sencillos a propósito para que se vea el lenguaje de Jasmine sin ruido extra.
+		</p>
+		<div class="bdd-intro jasmine-basic-examples">
+			<article class="reason-card bdd-card">
+				<h3>Ejemplo 1. Una suma</h3>
+				<div class="code-frame" aria-label="Ejemplo básico de suma con Jasmine">
+					<div class="code-frame__topbar">
+						<span class="code-dot code-dot--pink" aria-hidden="true"></span>
+						<span class="code-dot code-dot--yellow" aria-hidden="true"></span>
+						<span class="code-dot code-dot--green" aria-hidden="true"></span>
+						<p class="code-frame__title">sum-basic.spec.js</p>
+					</div>
+					<pre class="code-frame__pre"><code ngNonBindable class="language-javascript">describe('sum', () =&gt; &#123;
+	it('debería sumar dos números', () =&gt; &#123;
+		expect(sum(3, 2)).toBe(5);
+	&#125;);
+&#125;);</code></pre>
+				</div>
+			</article>
+
+			<article class="reason-card bdd-card">
+				<h3>Ejemplo 2. Una decisión simple</h3>
+				<div class="code-frame" aria-label="Ejemplo básico de decisión con Jasmine">
+					<div class="code-frame__topbar">
+						<span class="code-dot code-dot--pink" aria-hidden="true"></span>
+						<span class="code-dot code-dot--yellow" aria-hidden="true"></span>
+						<span class="code-dot code-dot--green" aria-hidden="true"></span>
+						<p class="code-frame__title">access-basic.spec.js</p>
+					</div>
+					<pre class="code-frame__pre"><code ngNonBindable class="language-javascript">describe('canEnter', () =&gt; &#123;
+	it('debería permitir el acceso si la edad es 18 o más', () =&gt; &#123;
+		expect(canEnter(20)).toBe(true);
+	&#125;);
+&#125;);</code></pre>
+				</div>
+			</article>
+		</div>
+	</section>
+
+	<section class="section-block panel" aria-labelledby="jasmine-summary-title">
+		<h2 id="jasmine-summary-title">Idea con la que quedarte</h2>
+		<p>
+			Jasmine no cambia el objetivo del test.
+			<strong class="text-highlight">Lo hace más claro, más agrupado y más legible</strong>
+			que un conjunto de asserts sueltos.
+		</p>
+	</section>
+</main>

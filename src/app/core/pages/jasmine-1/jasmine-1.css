@@ -1,0 +1,60 @@
+.jasmine-1-page {
+  display: block;
+}
+
+.jasmine-hero {
+  display: grid;
+  grid-template-columns: minmax(0, 1.7fr) minmax(180px, 0.8fr);
+  gap: 1.4rem;
+  align-items: center;
+}
+
+.jasmine-hero__copy {
+  min-width: 0;
+}
+
+.jasmine-logo-card {
+  margin: 0;
+  padding: 1rem;
+  border: 2px solid #4b4b4b;
+  background: rgba(13, 13, 13, 0.82);
+  box-shadow: inset 0 0 0 1px #121212;
+  display: grid;
+  justify-items: center;
+  gap: 0.8rem;
+}
+
+.jasmine-logo-card__image {
+  width: min(140px, 100%);
+  height: auto;
+  display: block;
+  filter: drop-shadow(0 0 10px rgba(138, 65, 130, 0.35));
+}
+
+.jasmine-logo-card figcaption {
+  font-family: 'Press Start 2P', 'Courier New', monospace;
+  font-size: 0.48rem;
+  line-height: 1.8;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--cyan);
+  text-align: center;
+}
+
+.jasmine-comparison,
+.jasmine-basic-examples {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+@media (max-width: 900px) {
+  .jasmine-hero,
+  .jasmine-comparison,
+  .jasmine-basic-examples {
+    grid-template-columns: 1fr;
+  }
+
+  .jasmine-logo-card {
+    max-width: 260px;
+    justify-self: center;
+  }
+}

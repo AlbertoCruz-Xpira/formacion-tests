@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { PrimerTest } from './primer-test';
+import { PrimerTest } from './estrategias-para-testear';
 
 describe('PrimerTest', () => {
   let component: PrimerTest;

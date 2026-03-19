@@ -1,0 +1,228 @@
+
+<main class="primer_test-page">
+
+	<header class="panel hero">
+		<p class="eyebrow">testing front-end</p>
+		<h1>Estrategias para testear correctamente</h1>
+		<p class="lead">
+			Una buena batería de tests protege lo importante: el comportamiento visible,
+			las reglas de negocio, las integraciones y los casos límite.
+			<strong class="text-highlight">No intentamos testear cada detalle interno del código.</strong>
+			En esta página verás ejemplos concretos de lo que sí merece una prueba
+			y de lo que conviene evitar por frágil o redundante.
+		</p>
+	</header>
+
+	<section class="section-block panel" aria-labelledby="what-to-test-title">
+		<h2 id="what-to-test-title">Qué suele merecer un test</h2>
+		<p>
+			Cuando priorizas bien, los tests ayudan a detectar errores pronto y a refactorizar con confianza.
+			Lo más valioso suele ser cubrir
+			<strong class="text-highlight">resultado visible, reglas, dependencias y bordes</strong>.
+		</p>
+		<div class="reason-grid">
+			<article class="reason-card">
+				<h3>Flujos del usuario</h3>
+				<p>
+					Qué pasa al enviar un formulario, pulsar un botón o completar un proceso importante.
+					<strong class="text-highlight">Si el usuario lo nota, suele merecer un test.</strong>
+				</p>
+			</article>
+			<article class="reason-card">
+				<h3>Reglas de negocio</h3>
+				<p>
+					Descuentos, validaciones, permisos, cálculos o decisiones del dominio.
+					<strong class="text-highlight">Aquí viven muchos bugs caros.</strong>
+				</p>
+			</article>
+			<article class="reason-card">
+				<h3>Integraciones</h3>
+				<p>
+					APIs, storage, router o servicios externos.
+					No se testea la librería en sí, sino
+					<strong class="text-highlight">cómo nos integramos con ella</strong>.
+				</p>
+			</article>
+			<article class="reason-card">
+				<h3>Casos límite y errores</h3>
+				<p>
+					Entradas inválidas, listas vacías, null, estados de carga o datos corruptos.
+					Son situaciones pequeñas que suelen romper mucho.
+				</p>
+			</article>
+		</div>
+	</section>
+
+	<section class="section-block panel reasons" aria-labelledby="what-not-to-test-title">
+		<h2 id="what-not-to-test-title">Qué no conviene priorizar</h2>
+		<p>
+			No todo test aporta el mismo valor. Algunos son tan frágiles o tan internos
+			que solo generan ruido al mantenerlos.
+		</p>
+		<div class="reason-grid">
+			<article class="reason-card">
+				<h3>Detalles internos</h3>
+				<p>
+					No interesa fijarse en si una función usa <strong class="text-highlight">map</strong>,
+					<strong class="text-highlight">trim</strong> o una variable concreta si el resultado final es correcto.
+				</p>
+			</article>
+			<article class="reason-card">
+				<h3>Duplicados</h3>
+				<p>
+					Varios tests que garantizan exactamente lo mismo encarecen mantenimiento
+					sin aumentar confianza real.
+				</p>
+			</article>
+			<article class="reason-card">
+				<h3>Frameworks o librerías ajenas</h3>
+				<p>
+					No testees que Angular renderiza un input o que el navegador ejecuta un click.
+					Testea <strong class="text-highlight">tu contrato con esas piezas</strong>.
+				</p>
+			</article>
+			<article class="reason-card">
+				<h3>Visuales incidentales</h3>
+				<p>
+					No suele compensar fijar colores, orden interno o clases CSS exactas
+					si no forman parte del comportamiento que quieres proteger.
+				</p>
+			</article>
+		</div>
+	</section>
+
+	<section class="section-block panel" aria-labelledby="user-flow-title">
+		<h2 id="user-flow-title">Ejemplo 1. Funcionalidad visible para el usuario</h2>
+        <p>
+            Este test protege una regla visible: si el carrito tiene productos y la app no está guardando,
+            el botón de compra debe activarse.
+            <strong class="text-highlight">Aquí importa el estado final, no cómo se calcula por dentro.</strong>
+        </p>
+		<app-code-playground
+			ariaLabel="Ejemplo de test de funcionalidad visible"
+			title="checkout-button-state.spec.js"
+			editorLabel="Pega o modifica el snippet para comprobar la respuesta"
+			[initialCode]="userFlowSnippet"
+		></app-code-playground>
+	</section>
+
+	<section class="section-block panel" aria-labelledby="business-logic-title">
+		<h2 id="business-logic-title">Ejemplo 2. Reglas de negocio y caso límite</h2>
+		<p>
+			Este tipo de test sí aporta mucho valor porque protege decisiones reales del negocio:
+			cuándo el envío es gratis y qué pasa con entradas inválidas.
+		</p>
+		<app-code-playground
+			ariaLabel="Ejemplo de test de reglas de negocio"
+			title="shipping-rules.spec.js"
+			editorLabel="Pega o modifica el snippet para comprobar la respuesta"
+			[initialCode]="businessRulesSnippet"
+		></app-code-playground>
+		<p>
+			Aquí el valor del test no está en cubrir líneas,
+			sino en dejar explícito un contrato:
+			<strong class="text-highlight">qué se cobra, cuándo y cómo falla</strong>.
+		</p>
+		<div class="reason-grid">
+			<article class="reason-card">
+				<h3>Qué protege</h3>
+				<p>
+					La regla del envío gratis y el rechazo de valores imposibles.
+				</p>
+			</article>
+			<article class="reason-card">
+				<h3>Qué caso borde cubre</h3>
+				<p>
+					Un total negativo, que podría colarse por un bug en otra capa.
+				</p>
+			</article>
+			<article class="reason-card">
+				<h3>Por qué merece quedarse</h3>
+				<p>
+					Porque protege decisiones de negocio que sí afectan al usuario y al sistema.
+				</p>
+			</article>
+		</div>
+	</section>
+
+	<section class="section-block panel" aria-labelledby="edge-cases-title">
+		<h2 id="edge-cases-title">Ejemplo 3. Integración con una dependencia</h2>
+		<p>
+			No testea <em>localStorage</em> en sí, sino que nuestra función le envía la información correcta.
+			<strong class="text-highlight">Eso sí es una integración útil de cubrir.</strong>
+		</p>
+		<app-code-playground
+			ariaLabel="Ejemplo de test de integración con una dependencia"
+			title="storage-integration.spec.js"
+			editorLabel="Pega o modifica el snippet para comprobar la respuesta"
+			[initialCode]="integrationSnippet"
+		></app-code-playground>
+		<p>
+			La idea aquí es sencilla:
+			<strong class="text-highlight">mockeamos o simulamos la dependencia</strong>
+			para validar el contrato entre nuestro código y el mundo exterior.
+		</p>
+	</section>
+
+	<section class="section-block panel" aria-labelledby="avoid-title">
+		<h2 id="avoid-title">Ejemplo 4. Un test que conviene evitar</h2>
+		<p>
+			No todo lo que puede comprobarse merece una prueba.
+			Un test que inspecciona la implementación interna suele romperse en refactors
+			aunque el comportamiento siga siendo correcto.
+		</p>
+		<app-code-playground
+			ariaLabel="Ejemplo de test que no aporta tanto valor"
+			title="implementation-detail.spec.js"
+			editorLabel="Pega o modifica el snippet para comprobar la respuesta"
+			[initialCode]="avoidSnippet"
+		></app-code-playground>
+		<div class="reason-grid">
+			<article class="reason-card">
+				<h3>Test útil</h3>
+				<p>
+					Comprobar el resultado final que ve o consume otro código.
+				</p>
+			</article>
+			<article class="reason-card">
+				<h3>Test frágil</h3>
+				<p>
+					Comprobar si la función usa una API concreta o una estrategia interna determinada.
+				</p>
+			</article>
+			<article class="reason-card">
+				<h3>Regla práctica</h3>
+				<p>
+					Si puedes refactorizar por dentro sin romper el contrato,
+					<strong class="text-highlight">ese detalle no debería fijarlo un test</strong>.
+				</p>
+			</article>
+		</div>
+	</section>
+
+	<section class="section-block panel" aria-labelledby="decision-guide-title">
+		<h2 id="decision-guide-title">Guía rápida para decidir</h2>
+		<div class="reason-grid">
+			<article class="reason-card">
+				<h3>Sí lo testearía si...</h3>
+				<p>
+					Romperlo afectaría al usuario, al negocio o a una integración crítica.
+				</p>
+			</article>
+			<article class="reason-card">
+				<h3>No lo priorizaría si...</h3>
+				<p>
+					Solo asegura una decisión interna de implementación que puede cambiar mañana.
+				</p>
+			</article>
+			<article class="reason-card">
+				<h3>Pregunta final</h3>
+				<p>
+					<strong class="text-highlight">¿Qué riesgo real cubre este test?</strong>
+					Si no sabes responder, quizá no merece quedarse.
+				</p>
+			</article>
+		</div>
+	</section>
+
+</main>
