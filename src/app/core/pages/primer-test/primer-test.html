@@ -1,21 +1,66 @@
 
 <main class="primer_test-page">
 
-    	<!-- La síntesis -->
-	<section class="section-block panel reasons" aria-labelledby="reasons-title">
-		<h2 id="reasons-title">¿Qué es lo que testeamos?.</h2>
+	<header class="panel hero">
+		<p class="eyebrow">testing front-end</p>
+		<h1>¿Qué testeamos?</h1>
+		<p class="lead">
+			Debemos testear lo que realmente importa: el comportamiento, las reglas de negocio y los casos límite.
+			 <strong class="text-highlight">No buscamos cubrir líneas de código ni detalles internos.</strong>
+			 En esta sección veremos ejemplos concretos que ilustran este enfoque.
+			 <strong class="text-highlight">No se trata de cantidad, sino de calidad y relevancia.</strong>
+		</p>
+	</header>
+
+	<section class="section-block panel" aria-labelledby="test-families-title">
+		<h2 id="test-families-title">Dos familias generales de tests</h2>
+		<p>
+			A grandes rasgos, muchos tests pueden agruparse en
+			<strong class="text-highlight">interacciones o integraciones</strong>
+			y en
+			<strong class="text-highlight">comportamientos, reglas y casos límite</strong>.
+			No son categorías rígidas, pero sirven para decidir mejor qué riesgo queremos cubrir.
+		</p>
 		<div class="reason-grid">
 			<article class="reason-card">
-				<h3>No buscamos cubrir líneas</h3>
+				<h3>Interacciones e integraciones</h3>
 				<p>
-					Buscamos cubrir riesgos.
+					Comprueban qué ocurre cuando el usuario actúa o cuando la aplicación se conecta
+					con formularios, APIs, almacenamiento o servicios externos.
+				</p>
+			</article>
+			<article class="reason-card">
+				<h3>Comportamientos y reglas</h3>
+				<p>
+					Validan que la lógica responda bien en casos felices, errores de entrada
+					y situaciones límite que suelen romper funcionalidades reales.
+				</p>
+			</article>
+			<article class="reason-card">
+				<h3>Qué buscamos de verdad</h3>
+				<p>
+					El objetivo no es acumular tests, sino proteger lo importante:
+					<strong class="text-highlight">flujo de usuario, negocio y puntos frágiles</strong>.
+				</p>
+			</article>
+		</div>
+	</section>
+
+    <!-- La síntesis -->
+	<section class="section-block panel reasons" aria-labelledby="reasons-title">
+		<h2 id="reasons-title">Tests recomendados.</h2>
+		<div class="reason-grid">
+			<article class="reason-card">
+				<h3>Integración con APIs externas</h3>
+				<p>
+					Testeos de integración con servicios externos que no dependen de nuestro código.
 					<strong class="text-highlight"></strong>
 				</p>
 			</article>
 			<article class="reason-card">
-				<h3>No buscamos cubrir implementación</h3>
+				<h3>Interacción con el usuario</h3>
 				<p>
-					Testeamos comporamiento, reglas de negocio y casos límite, no detalles internos.
+					Todas las entradas de los usuarios como los formularios, deben pasar validaciones.
 					<strong class="text-highlight"></strong>
 				</p>
 			</article>

@@ -1,0 +1,107 @@
+<main class="que-es-un-assert-page">
+  <header class="panel hero">
+    <p class="eyebrow">testing front-end</p>
+    <h1>¿Qué es una aserción?</h1>
+    <p class="lead">
+      Una aserción es una comprobación automática que valida si una condición se cumple.
+      Si la condición es falsa, el test informa del fallo.
+      <strong class="text-highlight">Es la forma de convertir una expectativa en una verificación.</strong>
+    </p>
+  </header>
+
+  <section class="section-block panel" aria-labelledby="definicion-assert-title">
+    <h2 id="definicion-assert-title">Definición breve</h2>
+    <p>
+      En testing, una aserción responde a una pregunta concreta:
+      <strong class="text-highlight">"¿Esto ocurrió como esperaba?"</strong>
+    </p>
+    <p>
+      Si la respuesta es sí, el test pasa. Si la respuesta es no,
+      la aserción muestra un mensaje para entender qué se rompió.
+    </p>
+  </section>
+
+  <section class="section-block panel assert-similes" aria-labelledby="similes-title">
+    <h2 id="similes-title">Símiles fuera de programación</h2>
+    <div class="reason-grid">
+      <article class="reason-card assert-similes__card">
+        <span class="pixel-icon pixel-icon--ticket" aria-hidden="true"></span>
+        <h3>Control de acceso a un cine</h3>
+        <p>
+          La regla es simple: "si tienes entrada válida, pasas".
+          La aserción sería comprobar esa regla para cada persona.
+        </p>
+      </article>
+      <article class="reason-card assert-similes__card">
+        <span class="pixel-icon pixel-icon--cupcake" aria-hidden="true"></span>
+        <h3>Receta en cocina</h3>
+        <p>
+          Si la receta dice "hornear 20 minutos", al final verificas si el bizcocho está hecho.
+          Esa verificación final es una aserción.
+        </p>
+      </article>
+      <article class="reason-card assert-similes__card">
+        <span class="pixel-icon pixel-icon--traffic" aria-hidden="true"></span>
+        <h3>Semáforo en la calle</h3>
+        <p>
+          "Con luz roja, los coches se detienen".
+          Comprobar que se detienen es validar la regla: eso también es una aserción.
+        </p>
+      </article>
+    </div>
+  </section>
+
+  <section class="section-block panel" aria-labelledby="codigo-assert-title">
+    <h2 id="codigo-assert-title">Ejemplos muy sencillos con console.assert</h2>
+    <p>
+      <code>console.assert</code> no lanza error por defecto,
+      pero muestra un mensaje en consola cuando la condición es falsa.
+    </p>
+
+    <div class="code-frame" aria-label="Ejemplo básico de aserción matemática">
+      <div class="code-frame__topbar">
+        <span class="code-dot code-dot--pink" aria-hidden="true"></span>
+        <span class="code-dot code-dot--yellow" aria-hidden="true"></span>
+        <span class="code-dot code-dot--green" aria-hidden="true"></span>
+        <p class="code-frame__title">math-assert.example.js</p>
+      </div>
+      <pre class="code-frame__pre"><code ngNonBindable class="language-javascript">const result = 2 + 2;
+console.assert(result === 4, '2 + 2 debería ser 4');</code></pre>
+    </div>
+
+    <div class="code-frame" aria-label="Ejemplo de aserción con regla de edad">
+      <div class="code-frame__topbar">
+        <span class="code-dot code-dot--pink" aria-hidden="true"></span>
+        <span class="code-dot code-dot--yellow" aria-hidden="true"></span>
+        <span class="code-dot code-dot--green" aria-hidden="true"></span>
+        <p class="code-frame__title">age-rule-assert.example.js</p>
+      </div>
+      <pre class="code-frame__pre"><code ngNonBindable class="language-javascript">function canEnter(age) &#123;
+  return age >= 18;
+    &#125;
+
+console.assert(canEnter(20) === true, 'Con 20 años debería poder entrar');
+console.assert(canEnter(16) === false, 'Con 16 años no debería poder entrar');</code></pre>
+    </div>
+
+    <div class="code-frame" aria-label="Ejemplo de aserción con texto">
+      <div class="code-frame__topbar">
+        <span class="code-dot code-dot--pink" aria-hidden="true"></span>
+        <span class="code-dot code-dot--yellow" aria-hidden="true"></span>
+        <span class="code-dot code-dot--green" aria-hidden="true"></span>
+        <p class="code-frame__title">text-assert.example.js</p>
+      </div>
+      <pre class="code-frame__pre"><code ngNonBindable class="language-javascript">const title = 'Tests Front End';
+console.assert(title.includes('Tests'), 'El título debería contener la palabra Tests');</code></pre>
+    </div>
+  </section>
+
+  <section class="section-block panel" aria-labelledby="conclusion-assert-title">
+    <h2 id="conclusion-assert-title">Idea clave</h2>
+    <p>
+      Una aserción es la pieza central de un test: sin aserciones,
+      solo ejecutas código; con aserciones,
+      <strong class="text-highlight">verificas comportamiento de forma objetiva</strong>.
+    </p>
+  </section>
+</main>

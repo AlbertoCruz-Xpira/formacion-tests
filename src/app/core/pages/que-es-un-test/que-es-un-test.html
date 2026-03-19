@@ -1,0 +1,78 @@
+<main class="que-es-un-test-page">
+  <header class="panel hero">
+    <p class="eyebrow">testing front-end</p>
+    <h1>¿Qué es un test unitario?</h1>
+    <p class="lead">
+      Un test unitario es una prueba automática que verifica que una pequeña parte del código
+      (normalmente una función o método) funciona como se espera,
+      <strong class="text-highlight">de forma aislada del resto del sistema</strong>.
+    </p>
+  </header>
+
+  <section class="section-block panel" aria-labelledby="definicion-basica-title">
+    <h2 id="definicion-basica-title">Definición básica</h2>
+    <p>
+      Un test unitario comprueba el comportamiento de la unidad más pequeña de código que tiene
+      sentido por sí misma, como una función, método, clase o procedimiento.
+    </p>
+    <p>
+      Su objetivo es confirmar que, para unas entradas dadas,
+      <strong class="text-highlight">esa unidad devuelve las salidas correctas</strong>
+      o realiza los efectos esperados.
+    </p>
+  </section>
+
+  <section class="section-block panel" aria-labelledby="como-se-escribe-title">
+    <h2 id="como-se-escribe-title">Cómo se escribe</h2>
+    <p>
+      Se suele seguir el patrón
+      <strong class="text-highlight">Arrange-Act-Assert</strong>:
+      preparar datos y entorno, ejecutar la función y hacer aserciones sobre el resultado.
+    </p>
+    <p>
+      Cada test cubre un caso concreto (por ejemplo: caso normal, borde o error),
+      y un conjunto de tests forma la batería de casos de prueba para esa unidad.
+    </p>
+  </section>
+
+  <section class="section-block panel" aria-labelledby="para-que-sirve-title">
+    <h2 id="para-que-sirve-title">Para qué sirve</h2>
+    <div class="reason-grid">
+      <article class="reason-card">
+        <h3>Detectar errores pronto</h3>
+        <p>
+          Ayuda a detectar errores durante el desarrollo,
+          <strong class="text-highlight">antes de integrar</strong>
+          con otras partes de la aplicación.
+        </p>
+      </article>
+      <article class="reason-card">
+        <h3>Facilitar el refactor</h3>
+        <p>
+          Si los tests siguen pasando después de cambiar el código,
+          existe alta confianza en que el comportamiento se mantiene.
+        </p>
+      </article>
+      <article class="reason-card">
+        <h3>Reducir regresiones</h3>
+        <p>
+          Una buena base de tests unitarios protege reglas clave de negocio
+          y evita romper funcionalidades al evolucionar la aplicación.
+        </p>
+      </article>
+    </div>
+  </section>
+
+  <section class="section-block panel" aria-labelledby="quien-y-cuando-title">
+    <h2 id="quien-y-cuando-title">Quién los hace y cuándo</h2>
+    <p>
+      Normalmente los escriben los propios desarrolladores mientras implementan
+      o justo después de implementar la funcionalidad.
+    </p>
+    <p>
+      También son una base importante de prácticas como
+      <strong class="text-highlight">TDD (desarrollo guiado por pruebas)</strong>,
+      donde se escribe primero el test y luego el código para hacerlo pasar.
+    </p>
+  </section>
+</main>
