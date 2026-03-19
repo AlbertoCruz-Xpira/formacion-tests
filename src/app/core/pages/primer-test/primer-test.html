@@ -37,27 +37,12 @@
             <strong class="text-highlight">Eran frágiles, lentos y con cobertura limitada.</strong>
         </p>
         <!-- Comprobar si un email es válido -->
-		<div class="code-frame" aria-label="Ejemplo de validación de email con console.assert">
-			<div class="code-frame__topbar">
-				<span class="code-dot code-dot--pink" aria-hidden="true"></span>
-				<span class="code-dot code-dot--yellow" aria-hidden="true"></span>
-				<span class="code-dot code-dot--green" aria-hidden="true"></span>
-				<p class="code-frame__title">email-validator.spec.js</p>
-			</div>
-			<pre class="code-frame__pre"><code ngNonBindable class="language-javascript" data-code-highlight>function isValidEmail(email) &#123;
-	return email.includes('@');
-&#125;
-
-console.assert(
-	isValidEmail('user@mail.com') === true,
-	'El campo email debe contener @'
-);
-
-console.assert(
-	isValidEmail('user.mail.com') === false,
-	'El campo email debe contener @'
-);</code></pre>
-		</div>
+		<app-code-playground
+			ariaLabel="Ejemplo de validación de email con console.assert"
+			title="email-validator.spec.js"
+			editorLabel="Pega o modifica el snippet para comprobar la respuesta"
+			[initialCode]="emailValidatorSnippet"
+		></app-code-playground>
 	</section>
 
 	<section class="section-block panel" aria-labelledby="business-logic-title">
@@ -67,68 +52,12 @@ console.assert(
 			Por eso, en vez de pensar en <strong class="text-highlight">20%</strong> como argumento literal
 			(en JavaScript eso ni siquiera compila), se valida y normaliza el dato antes de calcular.
 		</p>
-		<div class="code-frame" aria-label="Ejemplo de test de descuento en una regla de negocio">
-			<div class="code-frame__topbar">
-				<span class="code-dot code-dot--pink" aria-hidden="true"></span>
-				<span class="code-dot code-dot--yellow" aria-hidden="true"></span>
-				<span class="code-dot code-dot--green" aria-hidden="true"></span>
-				<p class="code-frame__title">business-logic-and-input.spec.js</p>
-			</div>
-			<pre class="code-frame__pre"><code ngNonBindable class="language-javascript" data-code-highlight>function parseDiscountInput(rawDiscount) &#123;
-	if (typeof rawDiscount === 'number') &#123;
-		return rawDiscount > 1 ? rawDiscount / 100 : rawDiscount;
-	&#125;
-
-	if (typeof rawDiscount !== 'string') return null;
-
-	const normalized = rawDiscount.trim().replace('%', '');
-	const parsed = Number(normalized);
-	if (Number.isNaN(parsed)) return null;
-
-	return rawDiscount.includes('%') || parsed > 1 ? parsed / 100 : parsed;
-	&#125;
-
-	function applyDiscount(price, rawDiscount) &#123;
-		const discount = parseDiscountInput(rawDiscount);
-
-		if (typeof price !== 'number' || Number.isNaN(price)) &#123;
-			throw new Error('price inválido');
-		&#125;
-
-		if (discount === null || discount < 0 || discount > 1) &#123;
-			throw new Error('discount inválido');
-		&#125;
-
-		return price - price * discount;
-	&#125;
-
-console.assert(
-	applyDiscount(100, 0.2) === 80,
-	'Debe aplicar correctamente un 20% en formato decimal'
-);
-
-console.assert(
-	applyDiscount(100, '20%') === 80,
-	'Debe aceptar descuento en formato de formulario (string con %)'
-);
-
-console.assert(
-	applyDiscount(100, 20) === 80,
-	'Debe aceptar 20 como porcentaje entero y normalizarlo'
-);
-
-let failed = false;
-try &#123;
-	applyDiscount(100, 'abc');
-&#125; catch &#123;
-	failed = true;
-&#125;
-
-console.assert(
-	failed === true,
-	'Debe rechazar descuentos en formato inválido'
-);</code></pre>
-		</div>
+		<app-code-playground
+			ariaLabel="Ejemplo de test de descuento en una regla de negocio"
+			title="business-logic-and-input.spec.js"
+			editorLabel="Pega o modifica el snippet para comprobar la respuesta"
+			[initialCode]="businessLogicSnippet"
+		></app-code-playground>
 		<p>
 			Este ejemplo es mejor que una suma simple porque
 			<strong class="text-highlight">combina negocio + validación de entrada</strong>
@@ -165,28 +94,12 @@ console.assert(
 			<strong class="text-highlight">los casos límite</strong>
 			y situaciones inesperadas.
 		</p>
-		<div class="code-frame" aria-label="Ejemplo de test con casos límite para nombre de usuario">
-			<div class="code-frame__topbar">
-				<span class="code-dot code-dot--pink" aria-hidden="true"></span>
-				<span class="code-dot code-dot--yellow" aria-hidden="true"></span>
-				<span class="code-dot code-dot--green" aria-hidden="true"></span>
-				<p class="code-frame__title">edge-cases.spec.js</p>
-			</div>
-			<pre class="code-frame__pre"><code ngNonBindable class="language-javascript" data-code-highlight>function getUserDisplayName(user) &#123;
-	if (!user) return 'Anonymous';
-	return user.name;
-&#125;
-
-console.assert(
-	getUserDisplayName(&#123; name: 'Ana' &#125;) === 'Ana',
-	'Debe devolver el nombre del usuario'
-);
-
-console.assert(
-	getUserDisplayName(null) === 'Anonymous',
-	'Debe devolver Anonymous si no hay usuario'
-);</code></pre>
-		</div>
+		<app-code-playground
+			ariaLabel="Ejemplo de test con casos límite para nombre de usuario"
+			title="edge-cases.spec.js"
+			editorLabel="Pega o modifica el snippet para comprobar la respuesta"
+			[initialCode]="edgeCasesSnippet"
+		></app-code-playground>
 		<p>
 			Un buen test no solo valida el camino feliz; también protege el sistema
 			ante entradas incompletas o inválidas.
@@ -199,29 +112,12 @@ console.assert(
 			Este ejemplo demuestra por qué testear aporta valor real:
 			<strong class="text-highlight">los tests pueden revelar bugs ocultos.</strong>
 		</p>
-		<div class="code-frame" aria-label="Ejemplo de test que detecta un bug en removeItem">
-			<div class="code-frame__topbar">
-				<span class="code-dot code-dot--pink" aria-hidden="true"></span>
-				<span class="code-dot code-dot--yellow" aria-hidden="true"></span>
-				<span class="code-dot code-dot--green" aria-hidden="true"></span>
-				<p class="code-frame__title">bug-hunting.spec.js</p>
-			</div>
-			<pre class="code-frame__pre"><code ngNonBindable class="language-javascript" data-code-highlight>function removeItem(list, item) &#123;
-	const index = list.indexOf(item);
-	list.splice(index, 1);
-	return list;
-&#125;
-
-console.assert(
-	JSON.stringify(removeItem(['a', 'b', 'c'], 'b')) === JSON.stringify(['a', 'c']),
-	'Debe eliminar el elemento correcto'
-);
-
-console.assert(
-	JSON.stringify(removeItem(['a', 'b', 'c'], 'x')) === JSON.stringify(['a', 'b', 'c']),
-	'No debería cambiar la lista si el elemento no existe'
-);</code></pre>
-		</div>
+		<app-code-playground
+			ariaLabel="Ejemplo de test que detecta un bug en removeItem"
+			title="bug-hunting.spec.js"
+			editorLabel="Pega o modifica el snippet para comprobar la respuesta"
+			[initialCode]="bugHuntingSnippet"
+		></app-code-playground>
 		<p>
 			Aquí aparece el bug real: <strong class="text-highlight">indexOf devuelve -1</strong>
 			y <strong class="text-highlight">splice(-1, 1)</strong> elimina el último elemento.
