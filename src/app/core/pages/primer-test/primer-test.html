@@ -1,0 +1,232 @@
+
+<main class="primer_test-page">
+
+    	<!-- La síntesis -->
+	<section class="section-block panel reasons" aria-labelledby="reasons-title">
+		<h2 id="reasons-title">¿Qué es lo que testeamos?.</h2>
+		<div class="reason-grid">
+			<article class="reason-card">
+				<h3>No buscamos cubrir líneas</h3>
+				<p>
+					Buscamos cubrir riesgos.
+					<strong class="text-highlight"></strong>
+				</p>
+			</article>
+			<article class="reason-card">
+				<h3>No buscamos cubrir implementación</h3>
+				<p>
+					Testeamos comporamiento, reglas de negocio y casos límite, no detalles internos.
+					<strong class="text-highlight"></strong>
+				</p>
+			</article>
+			<article class="reason-card">
+				<h3>Evitamos tests redundantes</h3>
+				<p>
+					<strong class="text-highlight"></strong>
+				</p>
+			</article>
+		</div>
+	</section>
+
+    <!-- El primer test -->
+	<section class="section-block panel reasons" aria-labelledby="reasons-title">
+		<h2 id="reasons-title">El primer test: scripts ad-hoc y validación manual</h2>
+        <p>
+            En los primeros días, los tests eran scripts improvisados que manipulaban el DOM
+            y verificaban resultados con console.assert o inspección visual.
+            <strong class="text-highlight">Eran frágiles, lentos y con cobertura limitada.</strong>
+        </p>
+        <!-- Comprobar si un email es válido -->
+		<div class="code-frame" aria-label="Ejemplo de validación de email con console.assert">
+			<div class="code-frame__topbar">
+				<span class="code-dot code-dot--pink" aria-hidden="true"></span>
+				<span class="code-dot code-dot--yellow" aria-hidden="true"></span>
+				<span class="code-dot code-dot--green" aria-hidden="true"></span>
+				<p class="code-frame__title">email-validator.spec.js</p>
+			</div>
+			<pre class="code-frame__pre"><code ngNonBindable class="language-javascript" data-code-highlight>function isValidEmail(email) &#123;
+	return email.includes('@');
+&#125;
+
+console.assert(
+	isValidEmail('user@mail.com') === true,
+	'El campo email debe contener @'
+);
+
+console.assert(
+	isValidEmail('user.mail.com') === false,
+	'El campo email debe contener @'
+);</code></pre>
+		</div>
+	</section>
+
+	<section class="section-block panel" aria-labelledby="business-logic-title">
+		<h2 id="business-logic-title">2. Test de lógica de negocio y validación de entrada</h2>
+		<p>
+			En una app real, el descuento suele venir de un formulario y llega como texto.
+			Por eso, en vez de pensar en <strong class="text-highlight">20%</strong> como argumento literal
+			(en JavaScript eso ni siquiera compila), se valida y normaliza el dato antes de calcular.
+		</p>
+		<div class="code-frame" aria-label="Ejemplo de test de descuento en una regla de negocio">
+			<div class="code-frame__topbar">
+				<span class="code-dot code-dot--pink" aria-hidden="true"></span>
+				<span class="code-dot code-dot--yellow" aria-hidden="true"></span>
+				<span class="code-dot code-dot--green" aria-hidden="true"></span>
+				<p class="code-frame__title">business-logic-and-input.spec.js</p>
+			</div>
+			<pre class="code-frame__pre"><code ngNonBindable class="language-javascript" data-code-highlight>function parseDiscountInput(rawDiscount) &#123;
+	if (typeof rawDiscount === 'number') &#123;
+		return rawDiscount > 1 ? rawDiscount / 100 : rawDiscount;
+	&#125;
+
+	if (typeof rawDiscount !== 'string') return null;
+
+	const normalized = rawDiscount.trim().replace('%', '');
+	const parsed = Number(normalized);
+	if (Number.isNaN(parsed)) return null;
+
+	return rawDiscount.includes('%') || parsed > 1 ? parsed / 100 : parsed;
+	&#125;
+
+	function applyDiscount(price, rawDiscount) &#123;
+		const discount = parseDiscountInput(rawDiscount);
+
+		if (typeof price !== 'number' || Number.isNaN(price)) &#123;
+			throw new Error('price inválido');
+		&#125;
+
+		if (discount === null || discount < 0 || discount > 1) &#123;
+			throw new Error('discount inválido');
+		&#125;
+
+		return price - price * discount;
+	&#125;
+
+console.assert(
+	applyDiscount(100, 0.2) === 80,
+	'Debe aplicar correctamente un 20% en formato decimal'
+);
+
+console.assert(
+	applyDiscount(100, '20%') === 80,
+	'Debe aceptar descuento en formato de formulario (string con %)'
+);
+
+console.assert(
+	applyDiscount(100, 20) === 80,
+	'Debe aceptar 20 como porcentaje entero y normalizarlo'
+);
+
+let failed = false;
+try &#123;
+	applyDiscount(100, 'abc');
+&#125; catch &#123;
+	failed = true;
+&#125;
+
+console.assert(
+	failed === true,
+	'Debe rechazar descuentos en formato inválido'
+);</code></pre>
+		</div>
+		<p>
+			Este ejemplo es mejor que una suma simple porque
+			<strong class="text-highlight">combina negocio + validación de entrada</strong>
+			y refleja un error típico: equivocarse al pasar argumentos o recibir formatos inesperados.
+		</p>
+		<div class="reason-grid">
+			<article class="reason-card">
+				<h3>¿Dónde validar?</h3>
+				<p>
+					En ambos sitios: en la UI (feedback temprano) y en la función (defensa final).
+				</p>
+			</article>
+			<article class="reason-card">
+				<h3>¿Se valida todo siempre?</h3>
+				<p>
+					No con la misma profundidad. Prioriza funciones críticas, fronteras de entrada
+					y zonas de alto riesgo de regresión.
+				</p>
+			</article>
+			<article class="reason-card">
+				<h3>¿Código o tests?</h3>
+				<p>
+					Primero el código define reglas y errores; después los tests prueban casos felices,
+					límites y formatos inválidos para garantizar el contrato.
+				</p>
+			</article>
+		</div>
+	</section>
+
+	<section class="section-block panel" aria-labelledby="edge-cases-title">
+		<h2 id="edge-cases-title">3. Test de comportamiento con edge cases</h2>
+		<p>
+			Aquí aparece un concepto crítico del testing:
+			<strong class="text-highlight">los casos límite</strong>
+			y situaciones inesperadas.
+		</p>
+		<div class="code-frame" aria-label="Ejemplo de test con casos límite para nombre de usuario">
+			<div class="code-frame__topbar">
+				<span class="code-dot code-dot--pink" aria-hidden="true"></span>
+				<span class="code-dot code-dot--yellow" aria-hidden="true"></span>
+				<span class="code-dot code-dot--green" aria-hidden="true"></span>
+				<p class="code-frame__title">edge-cases.spec.js</p>
+			</div>
+			<pre class="code-frame__pre"><code ngNonBindable class="language-javascript" data-code-highlight>function getUserDisplayName(user) &#123;
+	if (!user) return 'Anonymous';
+	return user.name;
+&#125;
+
+console.assert(
+	getUserDisplayName(&#123; name: 'Ana' &#125;) === 'Ana',
+	'Debe devolver el nombre del usuario'
+);
+
+console.assert(
+	getUserDisplayName(null) === 'Anonymous',
+	'Debe devolver Anonymous si no hay usuario'
+);</code></pre>
+		</div>
+		<p>
+			Un buen test no solo valida el camino feliz; también protege el sistema
+			ante entradas incompletas o inválidas.
+		</p>
+	</section>
+
+	<section class="section-block panel" aria-labelledby="bug-title">
+		<h2 id="bug-title">4. Test que detecta un bug real</h2>
+		<p>
+			Este ejemplo demuestra por qué testear aporta valor real:
+			<strong class="text-highlight">los tests pueden revelar bugs ocultos.</strong>
+		</p>
+		<div class="code-frame" aria-label="Ejemplo de test que detecta un bug en removeItem">
+			<div class="code-frame__topbar">
+				<span class="code-dot code-dot--pink" aria-hidden="true"></span>
+				<span class="code-dot code-dot--yellow" aria-hidden="true"></span>
+				<span class="code-dot code-dot--green" aria-hidden="true"></span>
+				<p class="code-frame__title">bug-hunting.spec.js</p>
+			</div>
+			<pre class="code-frame__pre"><code ngNonBindable class="language-javascript" data-code-highlight>function removeItem(list, item) &#123;
+	const index = list.indexOf(item);
+	list.splice(index, 1);
+	return list;
+&#125;
+
+console.assert(
+	JSON.stringify(removeItem(['a', 'b', 'c'], 'b')) === JSON.stringify(['a', 'c']),
+	'Debe eliminar el elemento correcto'
+);
+
+console.assert(
+	JSON.stringify(removeItem(['a', 'b', 'c'], 'x')) === JSON.stringify(['a', 'b', 'c']),
+	'No debería cambiar la lista si el elemento no existe'
+);</code></pre>
+		</div>
+		<p>
+			Aquí aparece el bug real: <strong class="text-highlight">indexOf devuelve -1</strong>
+			y <strong class="text-highlight">splice(-1, 1)</strong> elimina el último elemento.
+			Este tipo de hallazgo es exactamente lo que justifica invertir en tests.
+		</p>
+	</section>
+
+</main>

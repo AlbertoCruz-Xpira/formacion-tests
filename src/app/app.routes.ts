@@ -1,8 +1,18 @@
 import { Routes } from '@angular/router';
-import { DashboardPage } from './core/pages/dashboard/dashboard';
+import { HistoriaPage } from './core/pages/historia/historia';
+import { TecnologiasPage } from './core/pages/tecnologias/tecnologias';
+import { PrimerTest } from './core/pages/primer-test/primer-test';
+import { PageLayoutComponent } from './share/layout/page.layout';
 
 export const routes: Routes = [
-    {  path: '', redirectTo: 'dashboard', pathMatch: 'full' },
-    {  path: 'dashboard', component: DashboardPage },
-
+    {
+        path: '',
+        component: PageLayoutComponent,
+        children: [
+            { path: '', redirectTo: 'historia', pathMatch: 'full' },
+            { path: 'historia', component: HistoriaPage },
+            { path: 'primer-test', component: PrimerTest },
+            { path: 'tecnologias', component: TecnologiasPage },
+        ],
+    },
 ];

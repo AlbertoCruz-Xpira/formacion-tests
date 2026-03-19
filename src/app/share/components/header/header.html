@@ -1,0 +1,12 @@
+<nav class="menu">
+    <div class="menu-item" (click)="toggleSubmenu()">
+        PÍLDORA 1
+        @if (submenuOpen) {
+            <div class="submenu">
+                <a href="historia">Historia</a>
+                <a href="primer-test">Primer Test</a>
+                <a href="tecnologias">Tecnologías</a>
+            </div>
+        }
+    </div>
+</nav>
