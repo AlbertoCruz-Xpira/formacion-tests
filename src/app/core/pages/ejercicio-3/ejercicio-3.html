@@ -1,0 +1,54 @@
+<main class="ejercicio-3-page">
+  <header class="panel hero">
+    <p class="eyebrow">testing front-end</p>
+    <h1>Ejercicio 3. Quiz de Jasmine</h1>
+    <p class="lead">
+      Responde estas 5 preguntas sobre lo visto en Jasmine: estructura básica,
+      uso de <strong class="text-highlight">describe / it / expect</strong>
+      y matchers.
+    </p>
+  </header>
+
+  <section class="section-block panel" aria-labelledby="quiz-title">
+    <h2 id="quiz-title">Cuestionario</h2>
+    <p>
+      Cada pregunta tiene tres opciones. La última integra varios conceptos juntos.
+    </p>
+
+    <form class="quiz-form" [formGroup]="quizForm" (ngSubmit)="submitQuiz()">
+      @for (question of questions; track question.id) {
+        <fieldset class="quiz-question">
+          <legend>
+            <span class="quiz-question__title">{{ question.title }}</span>
+            <span class="quiz-question__prompt">{{ question.prompt }}</span>
+          </legend>
+
+          @if (question.codeExample) {
+            <pre class="quiz-question__code"><code>{{ question.codeExample }}</code></pre>
+          }
+
+          <div class="quiz-options">
+            @for (option of question.options; track option.value) {
+              <label class="quiz-option" [attr.for]="question.id + '-' + option.value">
+                <input
+                  type="radio"
+                  [id]="question.id + '-' + option.value"
+                  [name]="question.id"
+                  [value]="option.value"
+                  [formControlName]="question.id"
+                />
+                <span>{{ option.label }}</span>
+              </label>
+            }
+          </div>
+        </fieldset>
+      }
+
+      <button class="quiz-submit" type="submit">Corregir respuestas</button>
+    </form>
+
+    @if (submitted()) {
+      <p class="quiz-result" aria-live="polite">{{ resultText() }}</p>
+    }
+  </section>
+</main>

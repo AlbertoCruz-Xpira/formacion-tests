@@ -1,0 +1,255 @@
+<main class="jasmine-2-matchers-page">
+  <header class="panel hero">
+    <p class="eyebrow">testing front-end</p>
+    <h1>Jasmine 2. Matchers</h1>
+    <p class="lead">
+      En esta página nos centramos en los
+      <strong class="text-highlight">matchers</strong>,
+      que son la parte de Jasmine que expresa qué resultado esperamos.
+      Aquí verás solo casos básicos y muy prácticos.
+    </p>
+  </header>
+
+  <section class="section-block panel" aria-labelledby="matcher-definition-title">
+    <h2 id="matcher-definition-title">Qué es un matcher</h2>
+    <p>
+      Un matcher es la pieza que acompaña a <code>expect(...)</code>
+      para comparar el valor real con el esperado.
+      En otras palabras:
+      <strong class="text-highlight">traduce la expectativa del test a una comprobación concreta</strong>.
+    </p>
+    <div class="reason-grid">
+      <article class="reason-card">
+        <h3>Estructura base</h3>
+        <p><code>expect(valorReal).matcher(valorEsperado)</code></p>
+      </article>
+      <article class="reason-card">
+        <h3>Propósito</h3>
+        <p>Hacer el test más legible y explicar claramente qué se está validando.</p>
+      </article>
+      <article class="reason-card">
+        <h3>Resultado</h3>
+        <p>Si el matcher no se cumple, Jasmine marca el test como fallido.</p>
+      </article>
+    </div>
+  </section>
+
+  <section class="section-block panel" aria-labelledby="common-matchers-title">
+    <h2 id="common-matchers-title">Matchers básicos más usados</h2>
+    <table class="dsl-table" aria-label="Matchers básicos de Jasmine y su uso">
+      <thead>
+        <tr>
+          <th>Matcher</th>
+          <th>Cuándo usarlo</th>
+          <th>Ejemplo corto</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>toBe</td>
+          <td>Comparar valores primitivos exactamente</td>
+          <td><code>expect(total).toBe(3)</code></td>
+        </tr>
+        <tr>
+          <td>toEqual</td>
+          <td>Comparar objetos o arrays por contenido</td>
+          <td><code>expect(user).toEqual(&#123; id: 1 &#125;)</code></td>
+        </tr>
+        <tr>
+          <td>toContain</td>
+          <td>Verificar si un array o texto contiene un valor</td>
+          <td><code>expect(tags).toContain('ui')</code></td>
+        </tr>
+        <tr>
+          <td>toBeTrue / toBeFalse</td>
+          <td>Comprobar booleanos explícitos</td>
+          <td><code>expect(isValid).toBeTrue()</code></td>
+        </tr>
+        <tr>
+          <td>toBeGreaterThan</td>
+          <td>Comparar rangos numéricos</td>
+          <td><code>expect(score).toBeGreaterThan(0)</code></td>
+        </tr>
+      </tbody>
+    </table>
+
+  <p class="matcher-docs-note">
+    Si quieres ver el catálogo completo,
+    <a
+      class="matcher-docs-link"
+      href="https://jasmine.github.io/api/edge/matchers.html"
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      documentación oficial de todos los matchers de Jasmine
+    </a>.
+  </p>
+  </section>
+
+  <section class="section-block panel" aria-labelledby="js-vs-matchers-title">
+    <h2 id="js-vs-matchers-title">Operadores de JS vs Matchers de Jasmine</h2>
+    <p>
+      Los operadores de JavaScript (<code>==</code> y <code>===</code>) comparan valores,
+      pero no forman parte del sistema de reporting de Jasmine.
+      Los matchers sí están integrados en <code>expect(...)</code>
+      y generan mensajes más claros cuando algo falla.
+    </p>
+
+    <div class="reason-grid">
+      <article class="reason-card">
+        <h3>Operadores JS</h3>
+        <p>
+          <code>===</code> compara de forma estricta y <code>==</code> compara con coerción.
+          Sirven para lógica normal de código, pero no reportan fallos como Jasmine.
+        </p>
+      </article>
+      <article class="reason-card">
+        <h3>Matchers en Jasmine</h3>
+        <p>
+          Se usan dentro de <code>expect</code> y aportan contexto:
+          <strong class="text-highlight">qué esperabas y qué llegó realmente</strong>.
+        </p>
+      </article>
+      <article class="reason-card">
+        <h3>Regla práctica</h3>
+        <p>
+          En tests, prioriza matchers. Son más legibles y mejores para diagnosticar errores.
+        </p>
+      </article>
+    </div>
+
+    <table class="dsl-table" aria-label="Comparativa rápida entre operadores de JavaScript y matchers de Jasmine">
+      <thead>
+        <tr>
+          <th>Matcher</th>
+          <th>Comparación JS parecida</th>
+          <th>Cuándo usarlo</th>
+          <th>Ejemplo</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>toBe</td>
+          <td>===</td>
+          <td>Primitivos o igualdad estricta</td>
+          <td><code>expect(5).toBe(5)</code></td>
+        </tr>
+        <tr>
+          <td>toEqual</td>
+          <td>Comparación de contenido</td>
+          <td>Objetos y arrays</td>
+          <td><code>expect(&#123; a: 1 &#125;).toEqual(&#123; a: 1 &#125;)</code></td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section class="section-block panel" aria-labelledby="matcher-examples-title">
+    <h2 id="matcher-examples-title">Ejemplos básicos con Jasmine</h2>
+    <div class="bdd-intro matcher-examples-grid">
+      <article class="reason-card bdd-card">
+        <h3>1. toBe y toEqual</h3>
+        <div class="code-frame" aria-label="Ejemplo de toBe y toEqual en Jasmine">
+          <div class="code-frame__topbar">
+            <span class="code-dot code-dot--pink" aria-hidden="true"></span>
+            <span class="code-dot code-dot--yellow" aria-hidden="true"></span>
+            <span class="code-dot code-dot--green" aria-hidden="true"></span>
+            <p class="code-frame__title">toBe-toEqual.spec.js</p>
+          </div>
+          <pre class="code-frame__pre"><code ngNonBindable class="language-javascript">describe('price summary', () =&gt; &#123;
+  it('debería calcular el total', () =&gt; &#123;
+    const total = 2 + 3;
+    expect(total).toBe(5);
+  &#125;);
+
+  it('debería devolver un objeto esperado', () =&gt; &#123;
+    const summary = &#123; items: 2, total: 5 &#125;;
+    expect(summary).toEqual(&#123; items: 2, total: 5 &#125;);
+  &#125;);
+&#125;);</code></pre>
+        </div>
+      </article>
+
+      <article class="reason-card bdd-card">
+        <h3>2. toContain y toBeTrue</h3>
+        <div class="code-frame" aria-label="Ejemplo de toContain y toBeTrue en Jasmine">
+          <div class="code-frame__topbar">
+            <span class="code-dot code-dot--pink" aria-hidden="true"></span>
+            <span class="code-dot code-dot--yellow" aria-hidden="true"></span>
+            <span class="code-dot code-dot--green" aria-hidden="true"></span>
+            <p class="code-frame__title">contain-boolean.spec.js</p>
+          </div>
+          <pre class="code-frame__pre"><code ngNonBindable class="language-javascript">describe('user tags', () =&gt; &#123;
+  it('debería contener el tag premium', () =&gt; &#123;
+    const tags = ['new', 'premium', 'active'];
+    expect(tags).toContain('premium');
+  &#125;);
+
+  it('debería marcar al usuario como activo', () =&gt; &#123;
+    const isActive = true;
+    expect(isActive).toBeTrue();
+  &#125;);
+&#125;);</code></pre>
+        </div>
+      </article>
+
+      <article class="reason-card bdd-card">
+        <h3>3. toBeGreaterThan y not</h3>
+        <div class="code-frame" aria-label="Ejemplo de comparación numérica y not en Jasmine">
+          <div class="code-frame__topbar">
+            <span class="code-dot code-dot--pink" aria-hidden="true"></span>
+            <span class="code-dot code-dot--yellow" aria-hidden="true"></span>
+            <span class="code-dot code-dot--green" aria-hidden="true"></span>
+            <p class="code-frame__title">numeric-not.spec.js</p>
+          </div>
+          <pre class="code-frame__pre"><code ngNonBindable class="language-javascript">describe('score rules', () =&gt; &#123;
+  it('debería ser mayor que cero', () =&gt; &#123;
+    const score = 7;
+    expect(score).toBeGreaterThan(0);
+  &#125;);
+
+  it('no debería ser negativo', () =&gt; &#123;
+    const score = 7;
+    expect(score).not.toBeLessThan(0);
+  &#125;);
+&#125;);</code></pre>
+        </div>
+      </article>
+
+      <article class="reason-card bdd-card">
+        <h3>4. Ejemplo corto y realista</h3>
+        <div class="code-frame" aria-label="Ejemplo simple de validador con Jasmine">
+          <div class="code-frame__topbar">
+            <span class="code-dot code-dot--pink" aria-hidden="true"></span>
+            <span class="code-dot code-dot--yellow" aria-hidden="true"></span>
+            <span class="code-dot code-dot--green" aria-hidden="true"></span>
+            <p class="code-frame__title">email-validator.spec.js</p>
+          </div>
+          <pre class="code-frame__pre"><code ngNonBindable class="language-javascript">function isValidEmail(value) &#123;
+  return value.includes('@');
+&#125;
+
+describe('isValidEmail', () =&gt; &#123;
+  it('debería aceptar un email válido', () =&gt; &#123;
+    expect(isValidEmail('ana@mail.com')).toBeTrue();
+  &#125;);
+
+  it('debería rechazar un texto sin arroba', () =&gt; &#123;
+    expect(isValidEmail('ana.mail.com')).toBeFalse();
+  &#125;);
+&#125;);</code></pre>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <section class="section-block panel" aria-labelledby="next-step-title">
+    <h2 id="next-step-title">Resumen y siguiente paso</h2>
+    <p>
+      Si entiendes qué matcher usar en cada caso,
+      ya puedes escribir tests mucho más expresivos.
+      En la siguiente página veremos cómo organizar suites con el ciclo de vida
+      (<strong class="text-highlight">before y after</strong>) sin complicar los ejemplos.
+    </p>
+  </section>
+</main>

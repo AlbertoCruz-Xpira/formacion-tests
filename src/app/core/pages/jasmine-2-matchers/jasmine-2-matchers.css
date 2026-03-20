@@ -1,0 +1,29 @@
+.jasmine-2-matchers-page {
+  display: block;
+}
+
+.matcher-docs-note {
+  margin-top: 1rem;
+}
+
+.matcher-docs-link {
+  color: var(--yellow);
+  font-weight: 700;
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 0.18em;
+}
+
+.matcher-docs-link:hover {
+  color: var(--cyan);
+}
+
+.matcher-examples-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+@media (max-width: 900px) {
+  .matcher-examples-grid {
+    grid-template-columns: 1fr;
+  }
+}

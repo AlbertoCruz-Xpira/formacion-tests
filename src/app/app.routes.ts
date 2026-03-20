@@ -6,7 +6,9 @@ import { QueEsUnTestPage } from './core/pages/que-es-un-test/que-es-un-test';
 import { QueEsUnAssertPage } from './core/pages/que-es-un-assert/que-es-un-assert';
 import { Ejercicio1Page } from './core/pages/ejercicio-1/ejercicio-1';
 import { Ejercicio2Page } from './core/pages/ejercicio-2/ejercicio-2';
+import { Ejercicio3Page } from './core/pages/ejercicio-3/ejercicio-3';
 import { Jasmine1Page } from './core/pages/jasmine-1/jasmine-1';
+import { Jasmine2MatchersPage } from './core/pages/jasmine-2-matchers/jasmine-2-matchers';
 import { Video1Page } from './core/pages/video-1/video-1';
 import { PageLayoutComponent } from './share/layout/page.layout';
 
@@ -21,7 +23,9 @@ export const routes: Routes = [
             { path: 'que-es-un-assert', component: QueEsUnAssertPage },
             { path: 'ejercicio-1', component: Ejercicio1Page },
             { path: 'jasmine-1', component: Jasmine1Page },
+            { path: 'jasmine-2-matchers', component: Jasmine2MatchersPage },
             { path: 'ejercicio-2', component: Ejercicio2Page },
+            { path: 'ejercicio-3', component: Ejercicio3Page },
             { path: 'video-1', component: Video1Page },
             { path: 'estrategias', component: EstrategiasParaTestearPage },
             { path: 'tecnologias', component: TecnologiasPage },
