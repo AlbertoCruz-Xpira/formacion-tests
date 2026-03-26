@@ -1,0 +1,6 @@
+<div class="menu-item" (click)="toggleSubmenu()">
+    {{ title }}
+    @if (submenuOpen) {
+        <ng-content></ng-content>
+    }
+</div>
